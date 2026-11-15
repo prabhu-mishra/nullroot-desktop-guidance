@@ -1,336 +1,293 @@
-# Phase 1 Implementation Plan
+# Phase 1 Implementation Plan (Revised)
 
 ## Overview
 
-**Goal**: Implement core functionality to make NRDG usable for basic knowledge search, environment detection, and project inspection.
+**Goal**: Deliver a working end-to-end vertical slice: one high-quality Quickshell guide → frontmatter validation → knowledge registry → FTS5 indexing → BM25 retrieval → CLI display → agent skill integration.
 
-**Duration**: 4-6 weeks
-**Team**: 6 agents (as defined in CLAUDE.md)
+**Duration**: 3-4 weeks
+**Scope**: 8 packages + 2 applications (not 10 packages)
 
-## Acceptance Criteria (Definition of Done)
+## Six Supported Ecosystems (Preserved)
 
-Phase 1 is complete when ALL of the following are met:
+1. **Quickshell** - QtQuick/QML desktop shell
+2. **Hyprland / Hyprlang** - Dynamic tiling Wayland compositor
+3. **Qt6 / QML** - Cross-platform application framework
+4. **Lua** - Lightweight scripting language
+5. **Wayland** - Display server protocol
+6. **Linux Desktop** - D-Bus, systemd, PipeWire, NetworkManager, MPRIS, BlueZ, Portals
 
-1. **CLI works end-to-end**: `nrdg init` → `nrdg detect` → `nrdg search` → `nrdg retrieve` → `nrdg inspect` → `nrdg audit`
-2. **Knowledge base searchable**: 50+ guides across 3+ ecosystems indexed and searchable
-3. **Environment detection accurate**: Detects Hyprland, Quickshell, Qt, Lua on Arch Linux
-4. **Project inspection functional**: Identifies Quickshell/Hyprland/QML/Lua projects
-5. **Basic diagnostics work**: qmllint, luacheck integration producing structured diagnostics
-6. **Tests passing**: >80% coverage on core packages, all integration tests green
-7. **Documentation complete**: All public APIs documented, CLI help comprehensive
+---
 
-## Work Breakdown
+## Milestone 1: End-to-End Vertical Slice (Week 1-2)
 
-### P0 - Critical Path (Must Have)
+**Primary Objective**: One Quickshell guide flows through the entire pipeline.
 
-| ID | Task | Owner | Dependencies | Acceptance Criteria |
-|----|------|-------|--------------|---------------------|
-| 1.1 | Implement knowledge loader with frontmatter parsing | Agent 2 | - | Loads all guides from `knowledge/` dir, validates schema |
-| 1.2 | Build SQLite FTS5 indexer with BM25 | Agent 4 | 1.1 | `nrdg index` creates searchable index, `nrdg search` returns ranked results |
-| 1.3 | Implement CLI commands: init, detect, search, retrieve | Agent 5 | 1.1, 1.2 | All commands work with JSON/table output, proper exit codes |
-| 1.4 | Implement environment detection | Agent 5 | - | Detects distro, kernel, Hyprland, Quickshell, Qt, Lua, tools |
-| 1.5 | Implement project inspector (quickshell, hyprland, qml, lua) | Agent 4 | 1.4 | `nrdg inspect` identifies project type, lists files, deps |
-| 1.6 | Integrate qmllint for QML diagnostics | Agent 4 | 1.5 | `nrdg audit` runs qmllint, outputs structured diagnostics |
-| 1.7 | Integrate luacheck for Lua diagnostics | Agent 4 | 1.5 | `nrdg audit` runs luacheck, outputs structured diagnostics |
-| 1.8 | Write 20+ Quickshell guides | Agent 1 | - | Guides cover fundamentals, components, services, IPC |
-| 1.9 | Write 15+ Hyprland guides | Agent 1 | - | Guides cover config, rules, animations, IPC |
-| 1.10 | Write 10+ Qt/QML guides | Agent 1 | - | Guides cover properties, signals, models, lifecycle |
-| 1.11 | Unit tests for all core packages | Agent 6 | All | >80% coverage, CI green |
-| 1.12 | Integration tests for CLI workflows | Agent 6 | 1.3 | End-to-end tests pass |
+### Acceptance Criteria (All Must Pass)
 
-### P1 - High Priority (Should Have)
+| # | Criterion | Verification |
+|---|-----------|--------------|
+| 1 | **Guide exists** | `knowledge/quickshell/fundamentals/workspace-indicator.md` with valid frontmatter |
+| 2 | **Frontmatter validates** | `validateGuideEntry()` returns `ok: true` with zero warnings |
+| 3 | **Registry loads guide** | `KnowledgeLoader.loadGuide(id)` returns `ok: true` with complete `GuideEntry` |
+| 4 | **Indexer indexes guide** | `KnowledgeIndexer.indexGuide(guide)` returns `ok: true`, FTS5 row exists |
+| 5 | **Search retrieves guide** | `SearchEngine.search({query: "workspace indicator"})` returns the guide with score > 0 |
+| 6 | **CLI displays guide** | `nrdg retrieve <id> --json` outputs complete guide with provenance (sources, status, lastVerified) |
+| 7 | **Claude Code skill works** | Generated skill includes `search_guidance` tool that returns the guide |
+| 8 | **Codex skill works** | Generated skill prompt references the guide's ecosystem |
+| 9 | **Unit tests pass** | All new code covered, `pnpm test` exits 0 |
+| 10 | **Integration test passes** | `tests/integration/vertical-slice.test.ts` runs full pipeline |
 
-| ID | Task | Owner | Dependencies | Acceptance Criteria |
-|----|------|-------|--------------|---------------------|
-| 1.13 | Implement compatibility database | Agent 3 | - | `nrdg compatibility` checks API versions |
-| 1.14 | Write 10+ Lua guides | Agent 1 | - | Guides cover syntax, tables, modules |
-| 1.15 | Implement Hyprland config parser for analyzer | Agent 4 | 1.5 | Parses hyprland.conf, extracts rules/binds |
-| 1.16 | Add qmlformat integration | Agent 4 | 1.6 | `nrdg audit --fix` formats QML files |
-| 1.17 | Implement source registry CLI | Agent 2 | 1.1 | `nrdg sources list/add/remove` works |
-| 1.18 | Add cache/incremental indexing | Agent 4 | 1.2 | `nrdg index` only re-indexes changed files |
-| 1.19 | Implement config manager with file watch | Agent 3 | - | Config changes hot-reload |
-| 1.20 | Add CLI autocomplete (bash/zsh/fish) | Agent 5 | 1.3 | Tab completion works |
+### Vertical Slice Scope
 
-### P2 - Nice to Have (Phase 1 Stretch)
+**In Scope**:
+- Single guide: "Workspace Indicator" (fundamentals)
+- Packages: core, knowledge, retrieval, integrations, shared
+- Apps: cli, mcp-server (tools: search_guidance, retrieve_guide)
+- Skills: claude-code/quickshell, codex/quickshell
 
-| ID | Task | Owner | Dependencies | Acceptance Criteria |
-|----|------|-------|--------------|---------------------|
-| 1.21 | Basic semantic search (optional) | Agent 4 | 1.2 | Local embeddings improve search relevance |
-| 1.22 | Wayland/Linux-desktop guides | Agent 1 | - | 5+ guides each |
-| 1.23 | Performance benchmarks | Agent 6 | 1.2 | Search <50ms, index <10s for 500 guides |
-| 1.24 | MCP server basic tools | Agent 5 | 1.3 | `search_guidance`, `retrieve_guide` work via MCP |
+**Out of Scope**:
+- Other guides
+- Hyprland/Qt/Lua/Wayland/Linux-Desktop analyzers
+- Compatibility database
+- Environment detection
+- Diagnostics (qmllint, luacheck)
+- Semantic search
+- Source registry CLI
 
-## Detailed Task Specifications
+---
 
-### 1.1 Knowledge Loader
+## Milestone 2: Core Pipeline Hardening (Week 2-3)
 
-**File**: `packages/knowledge/src/loader.ts`
+**Objective**: Make the pipeline robust for multiple guides and ecosystems.
 
-**Requirements**:
-- Recursively scan `knowledge/` directory
-- Parse YAML frontmatter (--- delimited)
-- Validate against `GuideEntrySchema`
-- Return `Result<GuideEntry[], ValidationError[]>`
-- Support filtering by ecosystem/category
-- Compute content checksum for change detection
+### Acceptance Criteria
 
-**Tests**:
-- Load valid guide → success
-- Load guide with missing frontmatter → validation error
-- Load guide with invalid UUID → validation error
-- Load all guides from quickshell/ → correct count
-- Checksum changes when content modified
+| # | Criterion | Verification |
+|---|-----------|--------------|
+| 1 | **Multi-guide indexing** | `nrdg index` indexes 5+ guides across 2+ ecosystems |
+| 2 | **Filtering works** | `nrdg search` with `--ecosystem`, `--category`, `--status` filters |
+| 3 | **Incremental indexing** | Re-indexing unchanged guides is no-op (mtime/checksum) |
+| 4 | **Error handling** | Invalid frontmatter → clear error, not crash |
+| 5 | **MCP tools complete** | All 6 tools implemented (stubbed for non-retrieval) |
+| 6 | **Tests per package** | Each package has unit tests, integration test for pipeline |
 
-### 1.2 SQLite FTS5 Indexer
+---
 
-**Files**: 
-- `packages/retrieval/src/fts5.ts`
-- `packages/retrieval/src/indexer.ts`
-- `packages/retrieval/src/bm25.ts`
+## Milestone 3: Analyzer & Diagnostics Foundation (Week 3-4)
 
-**Requirements**:
-- Create virtual table `guides_fts` with columns: id, title, ecosystem, category, versions, status, tags, content
-- Tokenizer: `porter unicode61`
-- Batch insert with transactions (100 docs/batch)
-- BM25 ranking via FTS5 `rank` column
-- Support filters: ecosystem, category, version, status (post-query)
-- Incremental update: track file mtime/checksum
-- Rebuild command: drop + recreate
-- Statistics: doc count, index size, avg doc length
+**Objective**: Read-only project inspection with qmllint/luacheck diagnostics.
 
-**Tests**:
-- Index 100 guides → search returns results
-- BM25 ranking: exact matches score higher
-- Filter by ecosystem works
-- Incremental update only processes changed
-- Rebuild produces same results
+### Acceptance Criteria
 
-### 1.3 CLI Commands
+| # | Criterion | Verification |
+|---|-----------|--------------|
+| 1 | **Project inspector** | `nrdg inspect` identifies quickshell/hyprland/qml/lua projects |
+| 2 | **QML diagnostics** | `nrdg audit` runs qmllint, outputs structured diagnostics |
+| 3 | **Lua diagnostics** | `nrdg audit` runs luacheck, outputs structured diagnostics |
+| 3 | **Read-only guarantee** | No file writes without explicit `--fix` flag |
+| 4 | **Compatibility stub** | `nrdg compatibility` returns not-implemented for missing data |
 
-**File**: `apps/cli/src/cli.ts` (Commander.js)
+---
 
-**Commands**:
+## Agent Ownership Matrix (No Overlapping File Ownership)
 
-```bash
-nrdg init [--force] [--data-dir] [--ecosystems]
-nrdg detect [--json]
-nrdg search <query> [-e|--ecosystem] [-c|--category] [-v|--version] [-s|--status] [-l|--limit] [-o|--offset] [--json]
-nrdg retrieve <id> [--format markdown|json] [--json]
-nrdg inspect [path] [--deep] [--ecosystem] [--json]
-nrdg audit [path] [--fix] [--severity] [--json]
-nrdg index [--ecosystem] [--rebuild] [--stats] [--json]
-nrdg sources <list|add|remove|verify|update> [--json]
-nrdg doctor [--fix] [--json]
+| Agent | Primary Package(s) | Files Owned | Milestone 1 Tasks |
+|-------|-------------------|-------------|-------------------|
+| **Agent 1 (Research)** | Content only | `knowledge/quickshell/fundamentals/workspace-indicator.md` | Write single vertical-slice guide |
+| **Agent 2 (Knowledge)** | `@nullroot/knowledge` | `packages/knowledge/src/{schemas,registry,loader,validator}.ts` | 1.2, 1.3, 1.4, 1.5 |
+| **Agent 3 (Core)** | `@nullroot/core`, `@nullroot/config` | `packages/core/src/{types,errors,storage,config,events}.ts`, `packages/config/src/{schema,manager}.ts` | 1.1 (types for guide), 1.6 (config for CLI) |
+| **Agent 4 (Retrieval)** | `@nullroot/retrieval` | `packages/retrieval/src/{bm25,fts5,indexer,search}.ts` | 1.4, 1.5 |
+| **Agent 5 (CLI/Integrations)** | `@nullroot/integrations`, `apps/cli`, `apps/mcp-server` | `packages/integrations/src/{claude-code,codex,mcp}.ts`, `apps/cli/src/cli.ts`, `apps/mcp-server/src/index.ts` | 1.6, 1.7, 1.8 |
+| **Agent 6 (Quality)** | `tests/`, CI | `tests/integration/vertical-slice.test.ts`, `.github/workflows/ci.yml`, all `vitest.config.ts` | 1.9, 1.10 |
+
+**No Shared File Ownership**: Each file modified by exactly one agent.
+
+---
+
+## Dependency Graph (Milestone 1)
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        MILESTONE 1 DEPENDENCIES                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+Agent 1 (Research)          Agent 3 (Core)          Agent 2 (Knowledge)
+     │                            │                        │
+     │  1. Guide content          │  1. GuideEntry type    │
+     ▼                            │  (Ecosystem, etc.)     │
+┌─────────────────────────────────┘                        │
+│                     ┌────────────────────────────────────┘
+│                     ▼
+│            ┌─────────────────┐
+│            │  @nullroot/core │◄──── Agent 3
+│            │  (types,        │
+│            │   shared utils) │
+│            └────────┬────────┘
+│                     │
+│         ┌───────────┼───────────┐
+│         ▼           ▼           ▼
+│  ┌─────────────┐ ┌──────────┐ ┌────────────┐
+│  │ @nullroot/  │ │@nullroot/│ │ @nullroot/ │
+│  │ knowledge   │ │ retrieval│ │ integrations│
+│  │ (Agent 2)   │ │(Agent 4) │ │(Agent 5)   │
+│  └──────┬──────┘ └────┬─────┘ └─────┬──────┘
+│         │             │             │
+│         │    1.4      │    1.5      │ 1.6,1.7
+│         │  (loads)    │  (indexes)  │ (skills)
+│         ▼             ▼             ▼
+│  ┌─────────────────────────────────────────┐
+│  │           apps/cli (Agent 5)            │
+│  │  nrdg retrieve <id> --json              │
+│  └─────────────────────────────────────────┘
 ```
 
-**Requirements**:
-- Global `--json` flag for all commands
-- Proper exit codes (0=success, 1=error, 2=usage, 3=config, 4=not found, 5=search, 6=compat, 7=analyzer)
-- Colored table output by default
-- Help text for all commands/options
-- Config file loading via `@nullroot/config`
+### Critical Path (Sequential)
 
-### 1.4 Environment Detection
+```
+Agent 1: Write guide
+    ▼
+Agent 3: GuideEntry type in core (if not exists)
+    ▼
+Agent 2: Loader validates guide
+    ▼
+Agent 4: Indexer indexes guide
+    ▼
+Agent 4: Search retrieves guide
+    ▼
+Agent 5: CLI displays guide
+    ▼
+Agent 5: MCP tools return guide
+    ▼
+Agent 6: Integration test passes
+```
 
-**File**: `packages/analyzers/src/detection.ts` (new)
+---
 
-**Detection Logic**:
+## Revised Task Breakdown (Milestone 1 Only)
+
+### P0 - Critical Path (Sequential, Must Complete in Order)
+
+| ID | Task | Agent | Depends On | Acceptance Criteria |
+|----|------|-------|------------|---------------------|
+| 1.1 | Define `GuideEntry` and related types in `@nullroot/core` | Agent 3 | - | `packages/core/src/types.ts` exports all types, Zod schemas in knowledge |
+| 1.2 | Write "Workspace Indicator" guide with valid frontmatter | Agent 1 | 1.1 | `knowledge/quickshell/fundamentals/workspace-indicator.md` passes `validateGuideEntry()` |
+| 1.3 | Implement `KnowledgeLoader` with frontmatter parsing | Agent 2 | 1.1 | `loadGuide(id)` returns validated `GuideEntry` |
+| 1.4 | Implement `SourceRegistry` and register guide source | Agent 2 | 1.3 | Source manifest created, guide ID registered |
+| 1.5 | Implement `FTS5Index` with BM25 ranking | Agent 4 | 1.1 | Virtual table created, `insert()` and `search()` work |
+| 1.6 | Implement `KnowledgeIndexer` batch/insert | Agent 4 | 1.3, 1.5 | `indexGuide(guide)` stores in FTS5 |
+| 1.7 | Implement `SearchEngine` with filters | Agent 4 | 1.5 | `search({query, ecosystems[]})` returns ranked results |
+| 1.8 | Implement CLI `retrieve` and `search` commands | Agent 5 | 1.3, 1.7 | `nrdg retrieve <id> --json` and `nrdg search "..." --json` work |
+| 1.9 | Implement MCP `search_guidance` and `retrieve_guide` tools | Agent 5 | 1.7 | MCP tools return same data as CLI |
+| 1.10 | Generate Claude Code & Codex skills for Quickshell | Agent 5 | 1.2 | Skill files reference guide ecosystem |
+| 1.11 | Write vertical-slice integration test | Agent 6 | 1.8, 1.9 | `pnpm test` runs full pipeline test |
+| 1.12 | Run all unit tests, verify coverage | Agent 6 | 1.3-1.10 | `pnpm test` exits 0, coverage >80% for touched packages |
+
+### P1 - Parallelizable (After Dependencies Met)
+
+| ID | Task | Agent | Depends On | Acceptance Criteria |
+|----|------|-------|------------|---------------------|
+| 1.13 | CLI `init` command (minimal config) | Agent 5 | 1.1 | Creates config dir, enables ecosystems |
+| 1.14 | CLI `detect` command (read-only) | Agent 5 | 1.1 | Detects Hyprland/Quickshell/Qt/Lua versions |
+| 1.15 | Error handling for invalid guide IDs | Agent 2, 5 | 1.3, 1.8 | Clear error messages, proper exit codes |
+
+---
+
+## Test Strategy (Run After Each Milestone)
+
+### Milestone 1 Test Gate
+```bash
+# Must pass before Milestone 2 begins
+pnpm test                          # All unit tests
+pnpm test -- vertical-slice       # Integration test
+pnpm typecheck                     # No TypeScript errors
+pnpm lint                          # No lint errors
+```
+
+### Integration Test Specification
 ```typescript
-interface DetectionResult {
-  distribution: { name, version, id } | null;
-  kernel: string;
-  desktopSession: string | null;
-  hyprland: { version, instanceSignature } | null;
-  quickshell: { version } | null;
-  qt: { version, path } | null;
-  lua: { version, path } | null;
-  tools: { qmllint, qmlformat, qmlimportscanner, luac, luacheck };
-  configPaths: { hyprland, quickshell };
-}
-```
+// tests/integration/vertical-slice.test.ts
+import { describe, it, expect } from 'vitest';
+import { KnowledgeLoader } from '@nullroot/knowledge';
+import { KnowledgeIndexer } from '@nullroot/retrieval';
+import { SearchEngine } from '@nullroot/retrieval';
+import { validateGuideEntry } from '@nullroot/knowledge';
 
-**Implementation**:
-- `/etc/os-release` for distro
-- `uname -r` for kernel
-- `$XDG_CURRENT_DESKTOP`, `$DESKTOP_SESSION` for session
-- `hyprctl version` for Hyprland
-- `quickshell --version` for Quickshell
-- `qmake6 -v` or `qt6ct` for Qt
-- `lua -v` for Lua
-- `which` for tools
-- Standard config paths for Hyprland/Quickshell
-
-**Error Handling**: Missing commands → warning in output, not failure
-
-### 1.5 Project Inspector
-
-**File**: `packages/analyzers/src/inspector.ts` (new)
-
-**Logic**:
-1. Detect project type by file patterns:
-   - `shell.qml` + `QuickShell` import → quickshell
-   - `hyprland.conf` → hyprland
-   - `*.qml` → qml
-   - `*.lua` → lua
-2. Walk directory (max depth 10, exclude node_modules/.git)
-3. For each file: detect type, size, parse imports/exports
-4. Detect dependencies from package.json, CMakeLists.txt, etc.
-5. Run quick syntax check (if tools available)
-
-**Output**: `ProjectInfo` type from `@nullroot/core`
-
-### 1.6 QML Diagnostics
-
-**File**: `packages/analyzers/src/qml.ts`
-
-**Integration**:
-```bash
-qmllint --format json /path/to/project
-```
-
-**Parsing**:
-- Extract: file, line, column, message, severity
-- Map to `Diagnostic` type
-- Add explanation/fix from knowledge base
-- Categorize: unresolved import, type error, binding loop, etc.
-
-**Tests**:
-- Valid QML → no diagnostics
-- Missing import → error with location
-- Binding loop → warning with explanation
-- Type mismatch → error with fix suggestion
-
-### 1.7 Lua Diagnostics
-
-**File**: `packages/analyzers/src/lua.ts`
-
-**Integration**:
-```bash
-luacheck --codes --ranges --formatter=plain /path/to/project
-```
-
-**Parsing**:
-- Extract: file, line, column, code, message
-- Map to `Diagnostic` type
-- Add context from Lua guide
-
-### 1.8-1.10 Guide Writing
-
-**Agent 1 Responsibility**: Research and write guides
-
-**Process per guide**:
-1. Identify topic from category matrix
-2. Research official source
-3. Write guide with all required sections
-4. Validate with `validateGuideEntry()`
-5. Set status: `verified` (if tested), `reviewed` (if peer-reviewed)
-6. Commit with message: `docs(knowledge): add quickshell/<category>/<topic>`
-
-**Quality Bar**:
-- All 8 content sections present
-- At least 1 working code example
-- At least 1 official reference
-- No unverified claims presented as fact
-- Frontmatter complete and valid
-
-### 1.11 Unit Tests
-
-**Coverage Targets**:
-| Package | Target |
-|---------|--------|
-| @nullroot/core | 90% |
-| @nullroot/knowledge | 85% |
-| @nullroot/retrieval | 85% |
-| @nullroot/compatibility | 80% |
-| @nullroot/analyzers | 75% |
-| @nullroot/integrations | 70% |
-| @nullroot/config | 80% |
-| @nullroot/shared | 95% |
-
-**Test Patterns**:
-- Pure functions: direct unit tests
-- Classes: test public methods, mock dependencies
-- Async: test success + error paths
-- Validation: test valid + invalid inputs
-
-### 1.12 Integration Tests
-
-**File**: `tests/integration/cli.test.ts`
-
-**Scenarios**:
-```typescript
-// Full workflow test
-test('init -> detect -> search -> retrieve -> inspect -> audit', async () => {
-  await cli('init');
-  const detect = await cli('detect', { json: true });
-  const search = await cli('search "workspace"', { json: true });
-  const retrieve = await cli(`retrieve ${search.results[0].id}`, { json: true });
-  const inspect = await cli('inspect ./test-project', { json: true });
-  const audit = await cli('audit ./test-project', { json: true });
-  // Assertions...
+describe('Vertical Slice: Workspace Indicator Guide', () => {
+  const GUIDE_ID = 'workspace-indicator-guide-uuid';
+  
+  it('1. Guide frontmatter validates', async () => {
+    const result = validateGuideEntry(guideContent);
+    expect(result.success).toBe(true);
+    expect(result.data.status).toBe('verified');
+  });
+  
+  it('2. Loader loads guide from filesystem', async () => {
+    const loader = new KnowledgeLoader({ knowledgeRoot: './knowledge' });
+    const result = await loader.loadGuide(GUIDE_ID);
+    expect(result.ok).toBe(true);
+    expect(result.value.id).toBe(GUIDE_ID);
+  });
+  
+  it('3. Indexer indexes guide', async () => {
+    const indexer = new KnowledgeIndexer({ dbPath: ':memory:' });
+    await indexer.initialize();
+    const result = await indexer.indexGuide(guide);
+    expect(result.ok).toBe(true);
+  });
+  
+  it('4. Search retrieves guide with BM25 score', async () => {
+    const search = new SearchEngine({ dbPath: ':memory:' });
+    const results = await search.search({ query: 'workspace indicator' });
+    expect(results.ok).toBe(true);
+    expect(results.value.length).toBeGreaterThan(0);
+    expect(results.value[0].score).toBeGreaterThan(0);
+  });
+  
+  it('5. CLI retrieve outputs JSON with provenance', async () => {
+    const output = await runCLI(`retrieve ${GUIDE_ID} --json`);
+    const data = JSON.parse(output);
+    expect(data.sources).toBeDefined();
+    expect(data.status).toBe('verified');
+    expect(data.lastVerified).toBeDefined();
+  });
 });
 ```
 
-**Test Fixtures**: `tests/fixtures/` with sample projects
+---
 
-## Milestones
+## Explicit Out-of-Scope for Phase 1
 
-| Milestone | Target Date | Deliverables |
-|-----------|-------------|--------------|
-| M1: Foundation | Week 1 | Knowledge loader, FTS5 indexer, basic CLI |
-| M2: Detection | Week 2 | Environment detection, project inspector |
-| M3: Diagnostics | Week 3 | QML/Lua diagnostics, audit command |
-| M4: Knowledge | Week 4 | 45+ guides written and indexed |
-| M5: Polish | Week 5 | Tests, docs, CI, bug fixes |
-| M6: Release | Week 6 | Phase 1 complete, tag v0.1.0 |
+| Item | Deferred To |
+|------|-------------|
+| 45+ guides | Phase 2 (after pipeline validated) |
+| Hyprland/Qt/Lua/Wayland/Linux-Desktop analyzers | Phase 2-3 |
+| Compatibility database | Phase 2 |
+| Environment detection (full) | Phase 2 |
+| qmllint/luacheck diagnostics | Phase 2 |
+| Source registry CLI | Phase 2 |
+| Semantic search | Phase 3 (if benchmark justifies) |
+| Incremental indexing optimization | Phase 2 |
+| Config file watching | Phase 2 |
+| CLI autocomplete | Phase 2 |
 
-## Risk Mitigation
+---
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| FTS5 performance on large KB | Medium | High | Benchmark early, optimize tokenizer, consider partitioning |
-| qmllint output format changes | Low | Medium | Pin qmllint version, test in CI |
-| Guide writing bottleneck | High | High | Parallelize across agents, use templates |
-| CLI UX complexity | Medium | Medium | User testing, simplify commands |
-| Dependency conflicts (better-sqlite3) | Low | High | Test on target platforms early |
+## Go/No-Go for Milestone 2
 
-## Resource Allocation
-
-| Agent | Primary Focus | Secondary |
-|-------|---------------|-----------|
-| Agent 1 (Research) | Guide writing (1.8-1.10) | Source verification |
-| Agent 2 (Knowledge) | Loader, registry, validator (1.1, 1.17) | Schema evolution |
-| Agent 3 (Core) | Config, compatibility (1.13, 1.19) | Storage, events |
-| Agent 4 (Retrieval) | FTS5, indexer, search, analyzers (1.2, 1.5-1.7, 1.15-1.16) | BM25 tuning |
-| Agent 5 (CLI) | Commands, detection, MCP (1.3, 1.4, 1.20, 1.24) | UX polish |
-| Agent 6 (Quality) | Tests, CI, benchmarks (1.11, 1.12, 1.23) | Coverage, automation |
-
-## Success Metrics
-
-| Metric | Target |
-|--------|--------|
-| `nrdg search` latency (p95) | < 100ms |
-| `nrdg index` time (500 guides) | < 10s |
-| `nrdg detect` time | < 2s |
-| `nrdg audit` time (100 files) | < 5s |
-| Guide validation pass rate | 100% |
-| CLI command success rate | 100% (valid input) |
-| Test coverage (core packages) | > 80% |
-| CI build time | < 5 min |
-
-## Go/No-Go for Phase 2
-
-Phase 2 starts only if:
-- [ ] All P0 tasks complete with passing tests
-- [ ] 50+ guides indexed and searchable
-- [ ] `nrdg` CLI works reliably on clean Arch Linux install
-- [ ] No critical bugs open
-- [ ] Documentation for all public APIs complete
+Milestone 2 starts ONLY if:
+- [ ] All P0 tasks (1.1-1.12) complete
+- [ ] Vertical slice integration test passes
+- [ ] `pnpm test` passes with >80% coverage on core, knowledge, retrieval, integrations
+- [ ] No critical bugs in pipeline
 - [ ] Team lead approves
+
+---
 
 ## Notes
 
-- Tasks can be parallelized within dependency constraints
-- Agent 1 (Research) feeds guides continuously; others don't wait
-- Weekly sync to adjust priorities
-- Stretch goals (P2) only if P0/P1 on track
+- **Single vertical slice first**: Validates architecture before scaling
+- **Guide writing last in critical path**: Architecture validates with real content
+- **No overlapping ownership**: Each file has exactly one agent
+- **Tests after each milestone**: Not just at the end
+- **Read-only by default**: Detection/diagnostics never write without `--fix`
+- **Semantic search deferred**: No provider selection until evidence justifies
