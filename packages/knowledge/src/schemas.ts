@@ -3,7 +3,6 @@
  */
 
 import { z } from 'zod';
-import type { Ecosystem, Category, VerificationStatus } from '@nullroot/core';
 
 export const SourceReferenceSchema = z.object({
   url: z.string().url(),

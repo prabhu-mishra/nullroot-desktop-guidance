@@ -1,0 +1,149 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-11-15T00:00:00Z",
+  "sources": [
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Quickshell Official Documentation",
+      "description": "Official documentation for Quickshell, a QtQuick/QML-based desktop shell for Wayland compositors",
+      "ecosystem": "quickshell",
+      "version": "1.2",
+      "url": "https://quickshell.org/docs",
+      "repository": "https://github.com/quickshell/quickshell/tree/main/docs",
+      "license": "MIT",
+      "retrieved": "2026-11-15T00:00:00Z",
+      "checksum": "sha256:pending",
+      "tier": 1,
+      "versioning": "Matches Quickshell releases (semver)",
+      "retrievalSchedule": "On each Quickshell release + monthly",
+      "verification": "Automated checksum + manual review",
+      "contentTypes": ["getting-started", "components", "services", "ipc", "performance"],
+      "guidesIndexed": 1,
+      "versionMapping": [
+        { "version": "1.0.x", "docsVersion": "1.0", "notes": "Initial stable" },
+        { "version": "1.1.x", "docsVersion": "1.1", "notes": "WorkspaceIndicator added" },
+        { "version": "1.2.x", "docsVersion": "1.2", "notes": "Model→workspaces rename, new services" }
+      ]
+    },
+    {
+      "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+      "name": "Hyprland Wiki",
+      "description": "Official Hyprland documentation wiki covering configuration, rules, animations, IPC, and plugins",
+      "ecosystem": "hyprland",
+      "version": "0.45",
+      "url": "https://wiki.hypr.land",
+      "repository": "https://github.com/hyprwm/Hyprland/tree/main/docs",
+      "license": "MIT",
+      "retrieved": "2026-11-15T00:00:00Z",
+      "checksum": "sha256:pending",
+      "tier": 1,
+      "versioning": "Matches Hyprland releases (date-based: 0.Y.Z)",
+      "retrievalSchedule": "On each Hyprland release + bi-weekly",
+      "verification": "Automated checksum + manual review",
+      "contentTypes": ["configuration", "rules", "animations", "ipc", "plugins", "troubleshooting"],
+      "guidesIndexed": 0,
+      "versionMapping": [
+        { "version": "0.35.x", "docsVersion": "0.35", "notes": "windowrulev2 introduced" },
+        { "version": "0.40.x", "docsVersion": "0.40", "notes": "New animation system" },
+        { "version": "0.45.x", "docsVersion": "0.45", "notes": "Plugin API v2, IPC improvements" }
+      ]
+    },
+    {
+      "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+      "name": "Qt 6 Documentation",
+      "description": "Official Qt 6 documentation covering Qt Quick, QML, properties, signals, models, and rendering",
+      "ecosystem": "qt-qml",
+      "version": "6.8",
+      "url": "https://doc.qt.io/qt-6/",
+      "repository": "https://code.qt.io/cgit/qt/qtbase.git/tree/doc",
+      "license": "GFDL 1.3",
+      "retrieved": "2026-11-15T00:00:00Z",
+      "checksum": "sha256:pending",
+      "tier": 1,
+      "versioning": "Qt releases (6.LTS, 6.N)",
+      "retrievalSchedule": "On Qt LTS releases + quarterly",
+      "verification": "Manual review (license restricts automated copying)",
+      "contentTypes": ["properties", "signals", "models", "lifecycle", "imports", "rendering", "apis"],
+      "guidesIndexed": 0,
+      "versionMapping": [
+        { "version": "6.8", "docsVersion": "6.8", "notes": "Current LTS (until 2027)" },
+        { "version": "6.12", "docsVersion": "6.12", "notes": "Current feature release" },
+        { "version": "5.15", "docsVersion": "5.15", "notes": "Legacy LTS (EOL 2025)" }
+      ]
+    },
+    {
+      "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+      "name": "Lua 5.4 Reference Manual",
+      "description": "Official Lua 5.4 reference manual covering syntax, tables, metatables, coroutines, modules, and stdlib",
+      "ecosystem": "lua",
+      "version": "5.4",
+      "url": "https://www.lua.org/manual/5.4/",
+      "repository": "https://www.lua.org/manual/5.4/manual.html",
+      "license": "MIT",
+      "retrieved": "2026-11-15T00:00:00Z",
+      "checksum": "sha256:pending",
+      "tier": 1,
+      "versioning": "Lua versions (5.1, 5.2, 5.3, 5.4)",
+      "retrievalSchedule": "On Lua release (rare)",
+      "verification": "Manual review",
+      "contentTypes": ["syntax", "tables", "metatables", "coroutines", "modules", "stdlib"],
+      "guidesIndexed": 0,
+      "versionMapping": [
+        { "version": "5.4", "docsVersion": "5.4", "notes": "Current stable" },
+        { "version": "5.3", "docsVersion": "5.3", "notes": "Previous version" },
+        { "version": "5.1", "docsVersion": "5.1", "notes": "Legacy (LuaJIT baseline)" }
+      ]
+    },
+    {
+      "id": "e5f6a7b8-c9d0-1234-efab-345678901234",
+      "name": "Wayland Protocol Documentation",
+      "description": "Official Wayland protocol documentation covering core protocols, surfaces, outputs, input, and extensions",
+      "ecosystem": "wayland",
+      "version": "1.22",
+      "url": "https://wayland.freedesktop.org/docs/html/",
+      "repository": "https://gitlab.freedesktop.org/wayland/wayland/-/tree/main/doc",
+      "license": "MIT",
+      "retrieved": "2026-11-15T00:00:00Z",
+      "checksum": "sha256:pending",
+      "tier": 2,
+      "versioning": "Protocol versions (1.0, 1.1, etc.) + extensions",
+      "retrievalSchedule": "On Wayland release + quarterly",
+      "verification": "Manual review",
+      "contentTypes": ["protocols", "surfaces", "outputs", "input", "extensions"],
+      "guidesIndexed": 0,
+      "versionMapping": [
+        { "version": "1.22", "docsVersion": "1.22", "notes": "Current stable protocol" },
+        { "version": "1.21", "docsVersion": "1.21", "notes": "Previous version" },
+        { "version": "1.20", "docsVersion": "1.20", "notes": "Fractional scale v1 added" }
+      ]
+    },
+    {
+      "id": "f6a7b8c9-d0e1-2345-fabc-456789012345",
+      "name": "freedesktop.org Specifications",
+      "description": "Collection of freedesktop.org specifications for Linux desktop integration: D-Bus, systemd, PipeWire, NetworkManager, Portals, etc.",
+      "ecosystem": "linux-desktop",
+      "version": "2026",
+      "url": "https://specifications.freedesktop.org/",
+      "repository": "Various (DBus, systemd, PipeWire, etc.)",
+      "license": "Various (mostly MIT/LGPL)",
+      "retrieved": "2026-11-15T00:00:00Z",
+      "checksum": "sha256:pending",
+      "tier": 2,
+      "versioning": "Per-specification",
+      "retrievalSchedule": "Quarterly",
+      "verification": "Manual review",
+      "contentTypes": ["dbus", "systemd", "power", "audio", "network", "media", "bluetooth", "portals"],
+      "guidesIndexed": 0,
+      "subSources": [
+        { "specification": "D-Bus", "url": "https://dbus.freedesktop.org/doc/dbus-specification.html", "version": "1.14" },
+        { "specification": "systemd", "url": "https://systemd.io/", "version": "255" },
+        { "specification": "UPower", "url": "https://upower.freedesktop.org/docs/", "version": "1.90" },
+        { "specification": "PipeWire", "url": "https://pipewire.org/docs/", "version": "1.0" },
+        { "specification": "NetworkManager", "url": "https://networkmanager.dev/docs/api/", "version": "1.48" },
+        { "specification": "MPRIS", "url": "https://specifications.freedesktop.org/mpris-spec/latest/", "version": "2.2" },
+        { "specification": "BlueZ", "url": "https://bluez.gitlab.io/docs/", "version": "5.75" },
+        { "specification": "Desktop Portals", "url": "https://flatpak.github.io/xdg-desktop-portal/docs/", "version": "1.14" }
+      ]
+    }
+  ]
+}

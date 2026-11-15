@@ -2,8 +2,6 @@
  * Event system for NullRoot Desktop Guidance
  */
 
-import type { Result } from '@nullroot/shared';
-
 export type EventName =
   | 'knowledge:loaded'
   | 'knowledge:updated'
@@ -37,9 +35,11 @@ export interface EventMap {
 
 type EventListener<T extends EventName> = (payload: EventMap[T]) => void | Promise<void>;
 
+type AnyEventListener = (payload: unknown) => void | Promise<void>;
+
 interface ListenerEntry {
   name: EventName;
-  listener: EventListener<any>;
+  listener: AnyEventListener;
   once: boolean;
 }
 
@@ -51,12 +51,12 @@ export class EventEmitter {
     if (this.listeners.length >= this.maxListeners) {
       console.warn(`EventEmitter: max listeners (${this.maxListeners}) reached`);
     }
-    this.listeners.push({ name, listener, once: false });
+    this.listeners.push({ name, listener: listener as AnyEventListener, once: false });
     return () => this.off(name, listener);
   }
 
   once<T extends EventName>(name: T, listener: EventListener<T>): () => void {
-    this.listeners.push({ name, listener, once: true });
+    this.listeners.push({ name, listener: listener as AnyEventListener, once: true });
     return () => this.off(name, listener);
   }
 

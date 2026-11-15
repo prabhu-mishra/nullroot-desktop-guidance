@@ -28,7 +28,7 @@ export class CompatibilityChecker {
           deprecatedVersion: result.entry?.deprecatedIn,
           removedVersion: result.entry?.removedIn,
           replacement: result.entry?.replacement,
-          notes: result.entry?.notes,
+          notes: result.notes,
         },
       };
     } catch (error) {
@@ -56,7 +56,7 @@ export class CompatibilityChecker {
           deprecatedVersion: result.entry?.deprecatedIn,
           removedVersion: result.entry?.removedIn,
           replacement: result.entry?.replacement,
-          notes: result.entry?.notes,
+          notes: result.notes,
         };
       });
       return { ok: true, value: results };

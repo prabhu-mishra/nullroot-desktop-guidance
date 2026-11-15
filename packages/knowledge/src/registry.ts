@@ -5,7 +5,7 @@
 import { z } from 'zod';
 import type { Result } from '@nullroot/shared';
 import { computeChecksum } from '@nullroot/shared';
-import type { SourceReference, Ecosystem } from '@nullroot/core';
+import type { Ecosystem } from '@nullroot/core';
 
 export const SourceManifestSchema = z.object({
   id: z.string().uuid(),

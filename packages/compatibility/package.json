@@ -23,8 +23,9 @@
   "dependencies": {
     "@nullroot/core": "workspace:*",
     "@nullroot/knowledge": "workspace:*",
+    "@nullroot/shared": "workspace:*",
     "zod": "^3.23.0",
-    "better-sqlite3": "^11.0.0"
+    "better-sqlite3": "^13.2.0"
   },
   "devDependencies": {
     "typescript": "^5.7.0",

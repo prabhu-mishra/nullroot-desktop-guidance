@@ -2,8 +2,6 @@
  * Core type definitions for NullRoot Desktop Guidance
  */
 
-import type { Result } from '@nullroot/shared';
-
 /**
  * Supported ecosystems
  */

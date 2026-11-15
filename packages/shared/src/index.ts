@@ -115,7 +115,13 @@ export function slugify(text: string): string {
 
 export function truncate(text: string, maxLength: number, suffix = '…'): string {
   if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength - suffix.length) + suffix;
+  const truncated = text.slice(0, maxLength - suffix.length);
+  // Truncate at last word boundary if possible
+  const lastSpace = truncated.lastIndexOf(' ');
+  if (lastSpace > 0) {
+    return truncated.slice(0, lastSpace) + suffix;
+  }
+  return truncated + suffix;
 }
 
 // Object utilities

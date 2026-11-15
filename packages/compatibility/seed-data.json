@@ -1,0 +1,587 @@
+[
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000001",
+    "ecosystem": "quickshell",
+    "component": "Shell",
+    "api": "Shell",
+    "firstSupported": "1.0",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Main Shell API for creating desktop shells"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000002",
+    "ecosystem": "quickshell",
+    "component": "Shell",
+    "api": "Layer",
+    "firstSupported": "1.0",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Layer management for window layering (top, bottom, overlay)"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000003",
+    "ecosystem": "quickshell",
+    "component": "WorkspaceIndicator",
+    "api": "model",
+    "firstSupported": "1.1",
+    "deprecatedIn": "1.2",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Deprecated in 1.2, replaced by workspaces property"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000004",
+    "ecosystem": "quickshell",
+    "component": "WorkspaceIndicator",
+    "api": "workspaces",
+    "firstSupported": "1.2",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Replacement for deprecated model API"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000005",
+    "ecosystem": "quickshell",
+    "component": "WindowTitle",
+    "api": "title",
+    "firstSupported": "1.1",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Window title display component"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000006",
+    "ecosystem": "quickshell",
+    "component": "SystemTray",
+    "api": "items",
+    "firstSupported": "1.1",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "System tray items management"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000007",
+    "ecosystem": "quickshell",
+    "component": "Power",
+    "api": "batteryModel",
+    "firstSupported": "1.0",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Battery status model"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000008",
+    "ecosystem": "quickshell",
+    "component": "Power",
+    "api": "acModel",
+    "firstSupported": "1.0",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "AC power status model"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000009",
+    "ecosystem": "quickshell",
+    "component": "Network",
+    "api": "networkModel",
+    "firstSupported": "1.0",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Network status model"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000010",
+    "ecosystem": "quickshell",
+    "component": "Hyprland",
+    "api": "workspaceModel",
+    "firstSupported": "1.0",
+    "deprecatedIn": "1.2",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Deprecated in 1.2, replaced by workspaces property"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000011",
+    "ecosystem": "quickshell",
+    "component": "Hyprland",
+    "api": "workspaces",
+    "firstSupported": "1.2",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Replacement for deprecated workspaceModel API"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000012",
+    "ecosystem": "quickshell",
+    "component": "Hyprland",
+    "api": "windowModel",
+    "firstSupported": "1.0",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Window management model for Hyprland"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000013",
+    "ecosystem": "quickshell",
+    "component": "Audio",
+    "api": "audioModel",
+    "firstSupported": "1.1",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Audio volume and device model"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000014",
+    "ecosystem": "quickshell",
+    "component": "Bluetooth",
+    "api": "bluetoothModel",
+    "firstSupported": "1.2",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Bluetooth device management model"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000015",
+    "ecosystem": "quickshell",
+    "component": "Process",
+    "api": "Process",
+    "firstSupported": "1.0",
+    "source": "https://github.com/quickshell/quickshell",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Process execution and management"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000016",
+    "ecosystem": "hyprland",
+    "component": "Config",
+    "api": "windowrulev2",
+    "firstSupported": "0.35",
+    "source": "https://wiki.hyprland.org/Configuring/Window-Rules/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Modern window rules syntax (v2)"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000017",
+    "ecosystem": "hyprland",
+    "component": "Config",
+    "api": "windowrule",
+    "firstSupported": "0.10",
+    "deprecatedIn": "0.35",
+    "removedIn": "0.40",
+    "replacement": "windowrulev2",
+    "source": "https://wiki.hyprland.org/Configuring/Window-Rules/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Legacy window rules, removed in 0.40"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000018",
+    "ecosystem": "hyprland",
+    "component": "Config",
+    "api": "animation",
+    "firstSupported": "0.30",
+    "source": "https://wiki.hyprland.org/Configuring/Animations/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Window animation configuration"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000019",
+    "ecosystem": "hyprland",
+    "component": "Config",
+    "api": "plugin",
+    "firstSupported": "0.40",
+    "source": "https://wiki.hyprland.org/Plugins/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Plugin system for extending Hyprland"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000020",
+    "ecosystem": "hyprland",
+    "component": "Config",
+    "api": "monitor",
+    "firstSupported": "0.20",
+    "source": "https://wiki.hyprland.org/Configuring/Monitors/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Monitor configuration"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000021",
+    "ecosystem": "hyprland",
+    "component": "Config",
+    "api": "input",
+    "firstSupported": "0.10",
+    "source": "https://wiki.hyprland.org/Configuring/Input/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Input device configuration (keyboard, mouse, touchpad)"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000022",
+    "ecosystem": "hyprland",
+    "component": "IPC",
+    "api": "hyprctl/j/[cmd]",
+    "firstSupported": "0.35",
+    "source": "https://wiki.hyprland.org/IPC/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "JSON output format for hyprctl commands"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000023",
+    "ecosystem": "hyprland",
+    "component": "IPC",
+    "api": "hyprctl/keyword",
+    "firstSupported": "0.35",
+    "source": "https://wiki.hyprland.org/IPC/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Get/set config keywords via IPC"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000024",
+    "ecosystem": "hyprland",
+    "component": "IPC",
+    "api": "hyprctl/binds",
+    "firstSupported": "0.35",
+    "source": "https://wiki.hyprland.org/IPC/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "List key/mouse bindings via IPC"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000025",
+    "ecosystem": "hyprland",
+    "component": "Config",
+    "api": "layerrule",
+    "firstSupported": "0.40",
+    "source": "https://wiki.hyprland.org/Configuring/Layer-Rules/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Layer surface rules for wayland layers"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000026",
+    "ecosystem": "hyprland",
+    "component": "Config",
+    "api": "cursor",
+    "firstSupported": "0.20",
+    "source": "https://wiki.hyprland.org/Configuring/Cursors/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Cursor theme and size configuration"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000027",
+    "ecosystem": "hyprland",
+    "component": "Config",
+    "api": "gesture",
+    "firstSupported": "0.40",
+    "source": "https://wiki.hyprland.org/Configuring/Gestures/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Touchpad gesture configuration"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000028",
+    "ecosystem": "qt-qml",
+    "component": "QtQuick",
+    "api": "Item",
+    "firstSupported": "5.0",
+    "source": "https://doc.qt.io/qt-6/qml-qtquick-item.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Base visual item type"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000029",
+    "ecosystem": "qt-qml",
+    "component": "QtQuick",
+    "api": "Rectangle",
+    "firstSupported": "5.0",
+    "source": "https://doc.qt.io/qt-6/qml-qtquick-rectangle.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Filled rectangle visual item"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000030",
+    "ecosystem": "qt-qml",
+    "component": "QtQuick",
+    "api": "Text",
+    "firstSupported": "5.0",
+    "source": "https://doc.qt.io/qt-6/qml-qtquick-text.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Text display item"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000031",
+    "ecosystem": "qt-qml",
+    "component": "QtQuick",
+    "api": "MouseArea",
+    "firstSupported": "5.0",
+    "source": "https://doc.qt.io/qt-6/qml-qtquick-mousearea.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Mouse event handling area"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000032",
+    "ecosystem": "qt-qml",
+    "component": "QtQuick",
+    "api": "ListView",
+    "firstSupported": "5.0",
+    "source": "https://doc.qt.io/qt-6/qml-qtquick-listview.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "List view with delegate model"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000033",
+    "ecosystem": "qt-qml",
+    "component": "QtQml",
+    "api": "PropertyBinding",
+    "firstSupported": "5.0",
+    "source": "https://doc.qt.io/qt-6/qtqml-syntax-propertybinding.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Property binding syntax"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000034",
+    "ecosystem": "qt-qml",
+    "component": "QtQml",
+    "api": "Signal",
+    "firstSupported": "5.0",
+    "source": "https://doc.qt.io/qt-6/qtqml-syntax-signals.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Signal declaration and emission"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000035",
+    "ecosystem": "qt-qml",
+    "component": "QtQml",
+    "api": "Model",
+    "firstSupported": "5.0",
+    "source": "https://doc.qt.io/qt-6/qtqml-models-modelviews.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Data model interfaces (ListModel, ObjectModel, etc.)"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000036",
+    "ecosystem": "qt-qml",
+    "component": "QtQuick.Controls",
+    "api": "Button",
+    "firstSupported": "5.1",
+    "source": "https://doc.qt.io/qt-6/qml-qtquick-controls2-button.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Push button control"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000037",
+    "ecosystem": "qt-qml",
+    "component": "QtQuick.Controls",
+    "api": "Menu",
+    "firstSupported": "5.1",
+    "source": "https://doc.qt.io/qt-6/qml-qtquick-controls2-menu.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Popup menu control"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000038",
+    "ecosystem": "lua",
+    "component": "Stdlib",
+    "api": "table.insert",
+    "firstSupported": "5.1",
+    "source": "https://www.lua.org/manual/5.4/manual.html#pdf-table.insert",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Insert element into table"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000039",
+    "ecosystem": "lua",
+    "component": "Stdlib",
+    "api": "table.remove",
+    "firstSupported": "5.1",
+    "source": "https://www.lua.org/manual/5.4/manual.html#pdf-table.remove",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Remove element from table"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000040",
+    "ecosystem": "lua",
+    "component": "Stdlib",
+    "api": "coroutine.create",
+    "firstSupported": "5.1",
+    "source": "https://www.lua.org/manual/5.4/manual.html#pdf-coroutine.create",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Create new coroutine"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000041",
+    "ecosystem": "lua",
+    "component": "Stdlib",
+    "api": "coroutine.resume",
+    "firstSupported": "5.1",
+    "source": "https://www.lua.org/manual/5.4/manual.html#pdf-coroutine.resume",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Resume coroutine execution"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000042",
+    "ecosystem": "lua",
+    "component": "Stdlib",
+    "api": "setmetatable",
+    "firstSupported": "5.1",
+    "source": "https://www.lua.org/manual/5.4/manual.html#pdf-setmetatable",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Set metatable for table"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000043",
+    "ecosystem": "lua",
+    "component": "Stdlib",
+    "api": "require",
+    "firstSupported": "5.1",
+    "source": "https://www.lua.org/manual/5.4/manual.html#pdf-require",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Load module"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000044",
+    "ecosystem": "lua",
+    "component": "Stdlib",
+    "api": "package.loaded",
+    "firstSupported": "5.1",
+    "source": "https://www.lua.org/manual/5.4/manual.html#pdf-package.loaded",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Table of loaded modules"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000045",
+    "ecosystem": "lua",
+    "component": "Stdlib",
+    "api": "debug.traceback",
+    "firstSupported": "5.1",
+    "source": "https://www.lua.org/manual/5.4/manual.html#pdf-debug.traceback",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Get stack traceback"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000046",
+    "ecosystem": "wayland",
+    "component": "Core",
+    "api": "wl_surface",
+    "firstSupported": "1.0",
+    "source": "https://wayland.freedesktop.org/docs/html/apa.html#protocol-spec-wl_surface",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Base surface object"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000047",
+    "ecosystem": "wayland",
+    "component": "Core",
+    "api": "wl_output",
+    "firstSupported": "1.0",
+    "source": "https://wayland.freedesktop.org/docs/html/apa.html#protocol-spec-wl_output",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Output device (monitor)"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000048",
+    "ecosystem": "wayland",
+    "component": "Core",
+    "api": "wl_seat",
+    "firstSupported": "1.0",
+    "source": "https://wayland.freedesktop.org/docs/html/apa.html#protocol-spec-wl_seat",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Input device group (keyboard, pointer, touch)"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000049",
+    "ecosystem": "wayland",
+    "component": "Layer-shell",
+    "api": "zwlr_layer_shell_v1",
+    "firstSupported": "1.0",
+    "source": "https://github.com/wlr-layer-shell/wlr-layer-shell-unstable-v1",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Layer shell protocol for desktop shells"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000050",
+    "ecosystem": "wayland",
+    "component": "XDG-shell",
+    "api": "xdg_wm_base",
+    "firstSupported": "1.0",
+    "source": "https://wayland.freedesktop.org/docs/html/apa.html#protocol-spec-xdg_wm_base",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "XDG window management base"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000051",
+    "ecosystem": "linux-desktop",
+    "component": "D-Bus",
+    "api": "org.freedesktop.DBus",
+    "firstSupported": "1.0",
+    "source": "https://dbus.freedesktop.org/doc/dbus-specification.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "D-Bus message bus daemon interface"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000052",
+    "ecosystem": "linux-desktop",
+    "component": "systemd",
+    "api": "sd_notify",
+    "firstSupported": "230",
+    "source": "https://www.freedesktop.org/software/systemd/man/sd_notify.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Service readiness notification"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000053",
+    "ecosystem": "linux-desktop",
+    "component": "UPower",
+    "api": "org.freedesktop.UPower",
+    "firstSupported": "0.9",
+    "source": "https://upower.freedesktop.org/docs/UPower.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Power management daemon"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000054",
+    "ecosystem": "linux-desktop",
+    "component": "PipeWire",
+    "api": "pw_stream",
+    "firstSupported": "0.3",
+    "source": "https://docs.pipewire.org/page_api_pw_stream.html",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Stream handling in PipeWire"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000055",
+    "ecosystem": "linux-desktop",
+    "component": "NetworkManager",
+    "api": "org.freedesktop.NetworkManager",
+    "firstSupported": "1.0",
+    "source": "https://networkmanager.dev/docs/api/latest/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Network management daemon"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000056",
+    "ecosystem": "linux-desktop",
+    "component": "MPRIS",
+    "api": "org.mpris.MediaPlayer2",
+    "firstSupported": "2.0",
+    "source": "https://specifications.freedesktop.org/mpris-spec/latest/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Media player remote interfacing"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000057",
+    "ecosystem": "linux-desktop",
+    "component": "BlueZ",
+    "api": "org.bluez",
+    "firstSupported": "5.0",
+    "source": "https://www.bluez.org/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Bluetooth protocol stack"
+  },
+  {
+    "id": "0192f0a0-0000-0000-0000-000000000058",
+    "ecosystem": "linux-desktop",
+    "component": "Portals",
+    "api": "org.freedesktop.portal.Desktop",
+    "firstSupported": "1.0",
+    "source": "https://flatpak.github.io/xdg-desktop-portal/",
+    "verifiedDate": "2026-01-15T00:00:00.000Z",
+    "notes": "Desktop portal APIs for sandboxed apps"
+  }
+]
