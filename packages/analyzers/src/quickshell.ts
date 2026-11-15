@@ -5,8 +5,8 @@
 import type { Analyzer, AnalyzerResult, ProjectInfo, Diagnostic } from './types.js';
 import type { Ecosystem } from '@nullroot/core';
 
-export class QuickskillsAnalyzer implements Analyzer {
-  name = 'quickskills';
+export class QuickshellAnalyzer implements Analyzer {
+  name = 'quickshell';
 
   async analyze(path: string): Promise<AnalyzerResult> {
     // TODO: Implement Quickshell project analysis
@@ -17,15 +17,15 @@ export class QuickskillsAnalyzer implements Analyzer {
     // - qmlformat integration
     // - qmlimportscanner integration
     return {
-      project: { type: 'quickskills', root: path, files: [], dependencies: [], issues: [] },
+      project: { type: 'quickshell', root: path, files: [], dependencies: [], issues: [] },
       diagnostics: [],
       metadata: {},
     };
   }
 
   supports(ecosystem: Ecosystem): boolean {
-    return ecosystem === 'quickskills';
+    return ecosystem === 'quickshell';
   }
 }
 
-export const quickskillsAnalyzer = new QuickskillsAnalyzer();
+export const quickshellAnalyzer = new QuickshellAnalyzer();

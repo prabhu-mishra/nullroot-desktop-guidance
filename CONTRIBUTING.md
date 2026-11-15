@@ -172,7 +172,7 @@ class KnowledgeNotFoundError extends Error {
 ---
 id: "unique-guide-id"
 title: "Guide Title"
-ecosystem: "quickskills|hyprland|qt-qml|lua|wayland|linux-desktop"
+ecosystem: "quickshell|hyprland|qt-qml|lua|wayland|linux-desktop"
 category: "category-name"
 versions: ["1.0", "2.0"]
 sources:

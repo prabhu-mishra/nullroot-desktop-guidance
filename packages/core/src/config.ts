@@ -11,7 +11,7 @@ export const NRDGConfigSchema = z.object({
   dataDir: z.string().optional(),
   knowledge: z.object({
     enabledEcosystems: z.array(z.string()).default([
-      'quickskills',
+      'quickshell',
       'hyprland',
       'qt-qml',
       'lua',

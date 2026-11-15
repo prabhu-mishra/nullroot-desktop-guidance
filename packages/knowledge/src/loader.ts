@@ -20,7 +20,7 @@ export class KnowledgeLoader {
     try {
       // Search for the guide file across ecosystems
       const ecosystems = this.config.ecosystems ?? [
-        'quickskills',
+        'quickshell',
         'hyprland',
         'qt-qml',
         'lua',

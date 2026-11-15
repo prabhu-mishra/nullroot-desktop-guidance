@@ -12,9 +12,9 @@ export interface ClaudeCodeSkill {
 
 export const CLAUDE_CODE_SKILLS: ClaudeCodeSkill[] = [
   {
-    name: 'quickskills',
+    name: 'quickshell',
     description: 'Quickshell development guidance',
-    ecosystem: 'quickskills',
+    ecosystem: 'quickshell',
     instructions: 'Use the NullRoot knowledge base for Quickshell development',
     tools: ['search_guidance', 'retrieve_guide', 'detect_environment', 'inspect_project'],
   },

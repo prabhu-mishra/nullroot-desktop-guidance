@@ -11,9 +11,9 @@ export interface CodexSkill {
 
 export const CODEX_SKILLS: CodexSkill[] = [
   {
-    name: 'quickskills',
+    name: 'quickshell',
     description: 'Quickshell development guidance',
-    ecosystem: 'quickskills',
+    ecosystem: 'quickshell',
     prompt: 'You are an expert in Quickshell development. Use the NullRoot knowledge base for accurate guidance.',
   },
   {

@@ -12,7 +12,7 @@ export const SourceManifestSchema = z.object({
   name: z.string().min(1),
   description: z.string(),
   ecosystem: z.enum([
-    'quickskills',
+    'quickshell',
     'hyprland',
     'qt-qml',
     'lua',

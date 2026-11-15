@@ -8,7 +8,7 @@ import type { Ecosystem } from '@nullroot/core';
 export const CompatibilityEntrySchema = z.object({
   id: z.string().uuid(),
   ecosystem: z.enum([
-    'quickskills',
+    'quickshell',
     'hyprland',
     'qt-qml',
     'lua',
@@ -30,7 +30,7 @@ export type CompatibilityEntry = z.infer<typeof CompatibilityEntrySchema>;
 
 export const CompatibilityQuerySchema = z.object({
   ecosystem: z.enum([
-    'quickskills',
+    'quickshell',
     'hyprland',
     'qt-qml',
     'lua',

@@ -1,13 +1,13 @@
 ---
 id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 title: "Getting Started with Quickshell"
-ecosystem: "quickskills"
+ecosystem: "quickshell"
 category: "fundamentals"
 versions: ["1.0", "1.1", "1.2"]
 sources:
   - url: "https://quickshell.org/docs/getting-started"
     title: "Quickshell Getting Started Guide"
-    ecosystem: "quickskills"
+    ecosystem: "quickshell"
     versionApplicability: ">=1.0"
     retrieved: "2026-01-15T00:00:00Z"
     license: "MIT"

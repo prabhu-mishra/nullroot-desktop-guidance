@@ -9,7 +9,7 @@ export const SourceReferenceSchema = z.object({
   url: z.string().url(),
   title: z.string().min(1),
   ecosystem: z.enum([
-    'quickskills',
+    'quickshell',
     'hyprland',
     'qt-qml',
     'lua',
@@ -28,7 +28,7 @@ export const BaseMetadataSchema = z.object({
   id: z.string().uuid(),
   title: z.string().min(1).max(200),
   ecosystem: z.enum([
-    'quickskills',
+    'quickshell',
     'hyprland',
     'qt-qml',
     'lua',
@@ -135,7 +135,7 @@ export type GuideEntry = z.infer<typeof GuideEntrySchema>;
 
 export const SearchOptionsSchema = z.object({
   query: z.string().min(1),
-  ecosystems: z.array(z.enum(['quickskills', 'hyprland', 'qt-qml', 'lua', 'wayland', 'linux-desktop'])).optional(),
+  ecosystems: z.array(z.enum(['quickshell', 'hyprland', 'qt-qml', 'lua', 'wayland', 'linux-desktop'])).optional(),
   categories: z.array(z.string()).optional(),
   versions: z.array(z.string()).optional(),
   status: z.array(z.enum(['verified', 'reviewed', 'community', 'unverified', 'deprecated'])).optional(),
@@ -148,7 +148,7 @@ export type SearchOptions = z.infer<typeof SearchOptionsSchema>;
 export const SearchResultSchema = z.object({
   id: z.string().uuid(),
   title: z.string(),
-  ecosystem: z.enum(['quickskills', 'hyprland', 'qt-qml', 'lua', 'wayland', 'linux-desktop']),
+  ecosystem: z.enum(['quickshell', 'hyprland', 'qt-qml', 'lua', 'wayland', 'linux-desktop']),
   category: z.string(),
   snippet: z.string(),
   score: z.number(),

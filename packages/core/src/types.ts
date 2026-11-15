@@ -8,7 +8,7 @@ import type { Result } from '@nullroot/shared';
  * Supported ecosystems
  */
 export type Ecosystem =
-  | 'quickskills'
+  | 'quickshell'
   | 'hyprland'
   | 'qt-qml'
   | 'lua'
@@ -269,7 +269,7 @@ export interface EnvironmentInfo {
     version: string;
     instanceSignature?: string;
   };
-  quickskills?: {
+  quickshell?: {
     version: string;
   };
   qt?: {
@@ -289,7 +289,7 @@ export interface EnvironmentInfo {
   };
   configPaths: {
     hyprland?: string;
-    quickskills?: string;
+    quickshell?: string;
   };
 }
 
@@ -297,7 +297,7 @@ export interface EnvironmentInfo {
  * Project inspection result
  */
 export interface ProjectInfo {
-  type: 'quickskills' | 'hyprland' | 'qml' | 'lua' | 'mixed' | 'unknown';
+  type: 'quickshell' | 'hyprland' | 'qml' | 'lua' | 'mixed' | 'unknown';
   root: string;
   files: ProjectFile[];
   dependencies: ProjectDependency[];
