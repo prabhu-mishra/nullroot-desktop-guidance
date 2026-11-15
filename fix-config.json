@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "dataDir": "/home/roronoa/Projects/nullroot-desktop-guidance/.claude/worktrees/fix-typescript-build/apps/cli/data",
+  "dataDir": "./apps/cli/data",
   "knowledge": {
     "enabledEcosystems": [
       "quickshell",
