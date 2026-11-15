@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Knowledge engine, metadata schemas, source registry, versioning and validation",
+  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -22,11 +23,17 @@
   },
   "dependencies": {
     "@nullroot/core": "workspace:*",
-    "zod": "^3.23.0"
+    "@nullroot/shared": "workspace:*",
+    "zod": "^3.23.0",
+    "js-yaml": "^4.1.0"
   },
   "devDependencies": {
     "typescript": "^5.7.0",
     "vitest": "^2.1.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.0.0",
+    "@types/js-yaml": "^4.0.9"
+  },
+  "vitest": {
+    "passWithNoTests": true
   }
 }

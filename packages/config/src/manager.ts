@@ -3,7 +3,6 @@
  */
 
 import { readFile, writeFile, mkdir } from 'fs/promises';
-import { joinPaths } from '@nullroot/shared';
 import type { Result } from '@nullroot/shared';
 import { NRDGConfigSchema, type NRDGConfig, defaultConfig, getConfigPath, validateConfig } from '@nullroot/core';
 import { ConfigurationError } from '@nullroot/core';
@@ -40,14 +39,15 @@ export class ConfigManager {
     let target: Record<string, unknown> = newConfig;
 
     for (let i = 0; i < keys.length - 1; i++) {
-      const k = keys[i];
-      if (!(k in target) || typeof target[k] !== 'object') {
+      const k = keys[i]!;
+      if (!Object.prototype.hasOwnProperty.call(target, k) || typeof target[k] !== 'object' || target[k] === null) {
         target[k] = {};
       }
       target = target[k] as Record<string, unknown>;
     }
 
-    target[keys[keys.length - 1]] = value;
+    const lastKey = keys[keys.length - 1]!;
+    target[lastKey] = value;
 
     const validation = validateConfig(newConfig);
     if (!validation.ok) {

@@ -3,7 +3,6 @@
  */
 
 import { z } from 'zod';
-import type { Ecosystem } from '@nullroot/core';
 
 export const CompatibilityEntrySchema = z.object({
   id: z.string().uuid(),

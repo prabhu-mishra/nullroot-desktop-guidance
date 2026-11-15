@@ -2,7 +2,7 @@
  * Lua analyzer
  */
 
-import type { Analyzer, AnalyzerResult, ProjectInfo, Diagnostic } from './types.js';
+import type { Analyzer, AnalyzerResult } from './types.js';
 import type { Ecosystem } from '@nullroot/core';
 
 export class LuaAnalyzer implements Analyzer {

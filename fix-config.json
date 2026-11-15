@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "dataDir": "/home/roronoa/Projects/nullroot-desktop-guidance/.claude/worktrees/fix-typescript-build/apps/cli/data",
+  "knowledge": {
+    "enabledEcosystems": [
+      "quickshell",
+      "hyprland",
+      "qt-qml",
+      "lua",
+      "wayland",
+      "linux-desktop"
+    ],
+    "autoIndex": true,
+    "indexInterval": 3600
+  },
+  "retrieval": {
+    "defaultLimit": 10,
+    "maxLimit": 100,
+    "enableSemantic": false
+  },
+  "cli": {
+    "outputFormat": "table",
+    "color": true,
+    "pager": true
+  },
+  "mcp": {
+    "enabled": false,
+    "port": 3000,
+    "host": "localhost"
+  },
+  "logging": {
+    "level": "info"
+  }
+}

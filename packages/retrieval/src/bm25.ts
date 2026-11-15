@@ -29,8 +29,41 @@ export function computeBM25(
   return idf * (numerator / denominator);
 }
 
-export function tokenize(text: string): string[] {
+/**
+ * Splits camelCase and PascalCase identifiers into space-separated words.
+ * Also handles snake_case, kebab-case, and mixed separators.
+ *
+ * Examples:
+ *   'WorkspaceIndicator' -> 'workspace indicator'
+ *   'workspaceIndicator' -> 'workspace indicator'
+ *   'workspace_indicator' -> 'workspace indicator'
+ *   'workspace-indicator' -> 'workspace indicator'
+ *   'XMLHttpRequest' -> 'xml http request'
+ *   'getHTTPResponse' -> 'get http response'
+ */
+export function splitCamelCase(text: string): string {
   return text
+    // Insert space before uppercase letters that follow lowercase letters or digits
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    // Insert space before uppercase letter followed by lowercase (for consecutive caps like XML)
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+    // Replace underscores and hyphens with spaces
+    .replace(/[_-]/g, ' ')
+    // Convert to lowercase
+    .toLowerCase()
+    // Normalize multiple spaces
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Tokenizes text for BM25 scoring, including camelCase splitting.
+ * This ensures identifiers like 'WorkspaceIndicator' are searchable as 'workspace indicator'.
+ */
+export function tokenize(text: string): string[] {
+  // First split camelCase, then tokenize normally
+  const expandedText = splitCamelCase(text);
+  return expandedText
     .toLowerCase()
     .replace(/[^\w\s]/g, ' ')
     .split(/\s+/)

@@ -1,0 +1,16 @@
+# Ignore standalone test scripts at project root
+test-vertical-slice.mjs
+test-cli.mjs
+validate-frontmatter.mjs
+
+# Ignore build artifacts
+dist/
+build/
+*.tsbuildinfo
+
+# Ignore node_modules
+node_modules/
+
+# Ignore test output
+coverage/
+*.log

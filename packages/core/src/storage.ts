@@ -41,21 +41,25 @@ export class Storage {
     this.migrations = [
       {
         version: 1,
-        up: (db) => {
-          db.exec(`
-            CREATE TABLE IF NOT EXISTS metadata (
-              key TEXT PRIMARY KEY,
-              value TEXT NOT NULL
-            );
-          `);
+        up: (_db) => {
+          // Metadata table is created in runMigrations() before version check
+          // This migration is a placeholder for future schema changes
         },
       },
     ];
   }
 
   private runMigrations(): void {
-    const storedVersion = this.getMetadata('schema_version') ?? 0;
-    this.currentVersion = storedVersion;
+    // Ensure metadata table exists before querying it
+    this.db.exec(`
+      CREATE TABLE IF NOT EXISTS metadata (
+        key TEXT PRIMARY KEY,
+        value TEXT NOT NULL
+      );
+    `);
+
+    const storedVersion = this.getMetadata('schema_version');
+    this.currentVersion = storedVersion ? Number(storedVersion) : 0;
 
     for (const migration of this.migrations) {
       if (migration.version > this.currentVersion) {
@@ -126,12 +130,12 @@ export class Storage {
   }
 
   static getDefaultPath(): string {
-    const home = process.env.HOME ?? process.env.USERPROFILE ?? '.';
+    const home = process.env['HOME'] ?? process.env['USERPROFILE'] ?? '.';
     return joinPaths(home, '.local', 'share', 'nullroot-desktop-guidance', 'nrdg.db');
   }
 }
 
-export function createStorage(config?: Partial<StorageConfig>): Result<Storage, StorageError> {
+export async function createStorage(config?: Partial<StorageConfig>): Promise<Result<Storage, StorageError>> {
   const fullConfig: StorageConfig = {
     path: config?.path ?? Storage.getDefaultPath(),
     readonly: config?.readonly ?? false,

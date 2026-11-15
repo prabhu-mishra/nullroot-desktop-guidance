@@ -4,6 +4,8 @@
 
 import type { Diagnostic, ProjectInfo, Ecosystem } from '@nullroot/core';
 
+export type { Diagnostic, ProjectInfo, Ecosystem };
+
 export interface Analyzer {
   name: string;
   analyze(path: string): Promise<AnalyzerResult>;

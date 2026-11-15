@@ -5,6 +5,7 @@
 import Database from 'better-sqlite3';
 import type { Result } from '@nullroot/shared';
 import type { CompatibilityEntry, CompatibilityQuery } from './models.js';
+import { satisfiesVersion } from '@nullroot/shared';
 
 export class CompatibilityDatabase {
   private db: Database.Database;
@@ -27,12 +28,14 @@ export class CompatibilityDatabase {
         replacement TEXT,
         source TEXT NOT NULL,
         verified_date TEXT NOT NULL,
-        notes TEXT
+        notes TEXT,
+        UNIQUE(ecosystem, component, api)
       );
 
       CREATE INDEX IF NOT EXISTS idx_compat_ecosystem ON compatibility(ecosystem);
       CREATE INDEX IF NOT EXISTS idx_compat_component ON compatibility(component);
       CREATE INDEX IF NOT EXISTS idx_compat_api ON compatibility(api);
+      CREATE INDEX IF NOT EXISTS idx_compat_first_supported ON compatibility(first_supported);
     `);
   }
 
@@ -62,7 +65,21 @@ export class CompatibilityDatabase {
   }
 
   query(query: CompatibilityQuery): CompatibilityEntry[] {
-    let sql = 'SELECT * FROM compatibility WHERE 1=1';
+    let sql = `
+      SELECT
+        id,
+        ecosystem,
+        component,
+        api,
+        first_supported AS firstSupported,
+        deprecated_in AS deprecatedIn,
+        removed_in AS removedIn,
+        replacement,
+        source,
+        verified_date AS verifiedDate,
+        notes
+      FROM compatibility WHERE 1=1
+    `;
     const params: unknown[] = [];
 
     if (query.ecosystem) {
@@ -81,20 +98,78 @@ export class CompatibilityDatabase {
     return this.db.prepare(sql).all(...params) as CompatibilityEntry[];
   }
 
+  /**
+   * Query entries compatible with a specific version
+   * Returns entries where firstSupported <= version AND (removedIn is null OR version < removedIn)
+   */
+  queryCompatible(ecosystem: string, version: string): Result<CompatibilityEntry[], Error> {
+    try {
+      type Ecosystem = 'quickshell' | 'hyprland' | 'qt-qml' | 'lua' | 'wayland' | 'linux-desktop';
+      const entries = this.query({ ecosystem: ecosystem as Ecosystem });
+
+      const filtered = entries.filter(entry => {
+        // Check if introduced (version >= firstSupported)
+        if (!satisfiesVersion(version, `>=${entry.firstSupported}`)) {
+          return false;
+        }
+        // Check if removed (version < removedIn, or removedIn is null)
+        if (entry.removedIn && satisfiesVersion(version, `>=${entry.removedIn}`)) {
+          return false;
+        }
+        return true;
+      });
+
+      return { ok: true, value: filtered };
+    } catch (error) {
+      return { ok: false, error: error as Error };
+    }
+  }
+
   checkCompatibility(
     ecosystem: string,
     component: string,
     api: string,
     version: string
-  ): { compatible: boolean; entry?: CompatibilityEntry } {
-    const entries = this.query({ ecosystem: ecosystem as any, component, api });
+  ): { compatible: boolean; entry?: CompatibilityEntry; notes?: string } {
+    type Ecosystem = 'quickshell' | 'hyprland' | 'qt-qml' | 'lua' | 'wayland' | 'linux-desktop';
+    const entries = this.query({ ecosystem: ecosystem as Ecosystem, component, api });
     if (entries.length === 0) {
       return { compatible: false };
     }
 
-    const entry = entries[0];
-    // Version comparison logic would go here
-    return { compatible: true, entry };
+    const entry = entries[0]!; // Non-null assertion: we checked length > 0
+
+    // 1. Check if introduced (target version >= firstSupported)
+    if (!satisfiesVersion(version, `>=${entry.firstSupported}`)) {
+      return {
+        compatible: false,
+        entry,
+        notes: `API introduced in ${entry.firstSupported}, not available in ${version}`
+      };
+    }
+
+    // 2. Check if removed (target version >= removedIn)
+    if (entry.removedIn && satisfiesVersion(version, `>=${entry.removedIn}`)) {
+      return {
+        compatible: false,
+        entry,
+        notes: `API removed in ${entry.removedIn}, unavailable in ${version}` +
+               (entry.replacement ? `. Use ${entry.replacement} instead.` : '')
+      };
+    }
+
+    // 3. Check if deprecated (target version >= deprecatedIn)
+    if (entry.deprecatedIn && satisfiesVersion(version, `>=${entry.deprecatedIn}`)) {
+      return {
+        compatible: true,  // Still works but deprecated
+        entry,
+        notes: `API deprecated in ${entry.deprecatedIn}` +
+               (entry.replacement ? `. Consider migrating to ${entry.replacement}.` : '')
+      };
+    }
+
+    // 4. Compatible
+    return { compatible: true, entry, notes: 'API available and supported' };
   }
 
   close(): void {
