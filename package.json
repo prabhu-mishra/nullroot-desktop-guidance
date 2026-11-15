@@ -1,0 +1,29 @@
+{
+  "name": "nullroot-desktop-guidance",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Offline-first developer intelligence platform for Linux desktop development",
+  "license": "MIT",
+  "author": "NullRoot",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "lint": "pnpm -r run lint",
+    "typecheck": "pnpm -r run typecheck",
+    "clean": "pnpm -r run clean",
+    "dev": "pnpm --filter @nullroot/cli run dev",
+    "cli": "pnpm --filter @nullroot/cli run cli"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0",
+    "@types/node": "^22.0.0",
+    "eslint": "^9.15.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0"
+  }
+}

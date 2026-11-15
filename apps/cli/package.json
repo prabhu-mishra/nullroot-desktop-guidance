@@ -1,0 +1,42 @@
+{
+  "name": "@nullroot/cli",
+  "version": "0.0.0",
+  "private": true,
+  "description": "NRDG command-line interface",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "nrdg": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist",
+    "dev": "tsx watch src/cli.ts",
+    "cli": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@nullroot/core": "workspace:*",
+    "@nullroot/knowledge": "workspace:*",
+    "@nullroot/retrieval": "workspace:*",
+    "@nullroot/compatibility": "workspace:*",
+    "@nullroot/analyzers": "workspace:*",
+    "@nullroot/integrations": "workspace:*",
+    "@nullroot/config": "workspace:*",
+    "@nullroot/shared": "workspace:*",
+    "commander": "^12.0.0",
+    "zod": "^3.23.0",
+    "chalk": "^5.3.0",
+    "ora": "^8.0.0",
+    "table": "^6.8.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0"
+  }
+}
